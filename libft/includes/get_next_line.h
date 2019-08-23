@@ -15,7 +15,7 @@
 
 # define BUFF_SIZE 42
 
-# include "includes/libft.h"
+# include "libft.h"
 
 # include <sys/types.h>
 # include <sys/stat.h>

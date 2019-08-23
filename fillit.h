@@ -13,6 +13,8 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# include "/libft/include/libft.h"
+# include "libft/includes/libft.h"
+
+void	fillit(int fd);
 
 #endif
