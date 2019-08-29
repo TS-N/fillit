@@ -1,7 +1,7 @@
 NAME = fillit.a
 
-SRC = fillit.c
-OBJ = fillit.o
+SRC = fillitlist.c ft_flstnew.c ft_flstaddend.c tet_lst.c
+OBJ = fillitlist.o ft_flstnew.o ft_flstaddend.o tet_lst.o
 HEADER = fillit.h
 MAIN = main.c
 CC = gcc
@@ -12,7 +12,7 @@ all: $(NAME)
 
 $(NAME): $(SRC)
 	make -C libft/
-	$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER) -o $(OBJ)
+	$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
 	$(CC) $(CFLAGS) $(MAIN) $(OBJ) -o fillit -I $(HEADER) $(ARCH)
 
 clean:

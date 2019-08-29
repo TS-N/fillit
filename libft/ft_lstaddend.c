@@ -24,7 +24,7 @@ void	ft_lstaddend(t_list **alst, t_list *new)
 		node->next = new;
 	}
 	else
-		node = new;
+		*alst = new;
 	new->next = NULL;
 	return ;
 }

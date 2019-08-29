@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_intlen.c                                        :+:      :+:    :+:   */
+/*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/02 13:48:29 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/08/02 14:12:33 by tsaura-n         ###   ########.fr       */
+/*   Created: 2019/08/21 20:52:21 by tsaura-n          #+#    #+#             */
+/*   Updated: 2019/08/21 20:52:38 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
 
-size_t		ft_intlen(int n)
+void	fillit(int fd)
 {
-	size_t	len;
-	long	nb;
+	static f_list	*head;
+	char			*line;
+	int				ret;
+	f_list 			*node;
 
-	nb = n;
-	len = 0;
-	if (nb == 0)
-		return (1);
-	if (nb == -2147483648)
-		return (10);
-	if (nb < 0)
-		nb *= -1;
-	while (nb >= 1)
+	line = NULL;
+	if ((ret = valid_input(fd, &head)) > 0)
 	{
-		nb /= 10;
-		++len;
+		ft_putstr("Valid input.\n");
+		node = head;
+		while (node != NULL)
+		{
+			printf("pos =%u\nchar = %c\n", node->pos, node->c);
+			node = node->next;
+		}
 	}
-	return (len);
+	else
+		printf("Invalid input.\nRet =%d\n", ret);
+	return ;
 }
