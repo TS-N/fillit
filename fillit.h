@@ -24,7 +24,7 @@ typedef struct		a_list
 
 f_list		*ft_flstnew(char c, unsigned short pos);
 void	ft_flstaddend(f_list **alst, f_list *new);
-int		valid_input(int fd, f_list **head);
+//int		valid_input(int fd, f_list **head);
 void	fillit(int fd);
 
 #endif

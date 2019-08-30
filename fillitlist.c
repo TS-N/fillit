@@ -12,6 +12,15 @@
 
 #include "fillit.h"
 
+min_grid(int tetnb)
+{
+	int		len;
+
+	len = 0;
+	while((len * len) < (tetnb * 4))
+		++len;
+}
+
 void	fillit(int fd)
 {
 	static f_list	*head;
@@ -22,13 +31,13 @@ void	fillit(int fd)
 	line = NULL;
 	if ((ret = valid_input(fd, &head)) > 0)
 	{
-		ft_putstr("Valid input.\n");
 		node = head;
-		while (node != NULL)
+		min_grid(ret);
+		/*while (node != NULL)
 		{
 			printf("pos =%u\nchar = %c\n", node->pos, node->c);
 			node = node->next;
-		}
+		}*/
 	}
 	else
 		printf("Invalid input.\nRet =%d\n", ret);

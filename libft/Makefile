@@ -28,7 +28,7 @@ SRC = ft_isalnum.c ft_isprint.c ft_strcpy.c ft_strncpy.c ft_tolower.c \
 	ft_lstmap.c ft_put_ithdigit.c ft_put_ithdigit_fd.c get_next_line.c
 HEADER = includes/
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 

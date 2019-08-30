@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "includes/get_next_line.h"
 
 char		*ft_joinnfree(char *content, char *buf)
 {
@@ -130,12 +130,10 @@ int			get_next_line(const int fd, char **line)
 /*
 **int			main()
 **{
-**	int		fd;
 **	int		fd2;
 **	char	*line;
 **	int		buf;
 **	int		z;
-**
 **	line = NULL;
 **	fd = open("text.txt", O_RDONLY);
 **	fd2 = open("text2.txt", O_RDONLY);
@@ -145,7 +143,6 @@ int			get_next_line(const int fd, char **line)
 **		if (buf == fd)
 **			buf = fd2;
 **		else
-**			buf = fd;
 **		printf("%d\t%s\n", z, line);
 **		free(line);
 **	}

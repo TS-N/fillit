@@ -1,7 +1,7 @@
 NAME = fillit.a
 
-SRC = fillitlist.c ft_flstnew.c ft_flstaddend.c tet_lst.c
-OBJ = fillitlist.o ft_flstnew.o ft_flstaddend.o tet_lst.o
+SRC = fillit.c
+OBJ = fillit.o
 HEADER = fillit.h
 MAIN = main.c
 CC = gcc
@@ -23,4 +23,7 @@ fclean: clean
 	/bin/rm -f $(NAME)
 	make fclean -C libft/
 
-re : fclean all
+re: fclean all
+
+debug:
+	$(CC) -g $(CFLAGS) $(MAIN) $(OBJ) -o fillit -I $(HEADER) $(ARCH)
