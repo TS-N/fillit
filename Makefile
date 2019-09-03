@@ -1,7 +1,7 @@
 NAME = fillit.a
 
-SRC = fillit.c parseTet.c
-OBJ = fillit.o parseTet.o
+SRC = fillit.c parsetet.c
+OBJ = fillit.o parsetet.o
 HEADER = fillit.h
 MAIN = main.c
 CC = gcc
