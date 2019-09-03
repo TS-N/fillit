@@ -15,16 +15,7 @@
 
 # include "libft/includes/libft.h"
 
-typedef struct		a_list 
-{
-	char			c;
-	unsigned short	pos;
-	struct a_list	*next;
-}					f_list;	
-
-f_list		*ft_flstnew(char c, unsigned short pos);
-void	ft_flstaddend(f_list **alst, f_list *new);
-//int		valid_input(int fd, f_list **head);
+int		valid_input(int fd, t_list **head);
 void	fillit(int fd);
 
 #endif
