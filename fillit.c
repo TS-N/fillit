@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-
+/* 
 unsigned int mingridsize(unsigned int ret)
 {
 	unsigned int	s;
@@ -20,6 +20,10 @@ unsigned int mingridsize(unsigned int ret)
 	while (s * s < ret * 4)
 		++s;
 	return (s);
+}
+int		outofbounddown(unsigned short int *grid, t_list *node, unsigned int s)
+{
+	if
 }
 
 int		overlap(unsigned short int *grid, t_list *node)
@@ -41,24 +45,32 @@ nodetest(unsigned short *grid, unsigned int s, t_list *node)
 	unsigned int	i;
 
 	i = 0;
-	while ( i < s - 4)
+	while (i < s)
 	{
 		if (overlap(grid[i], node))
 	}
 }
+
 unsigned short	*fillgrid(unsigned int s, t_list **head)
 {
 	unsigned short int	grid[s];
-	unsigned int		i;
+	unsigned int		ix;
+	unsigned int		iy;
 	t_list				*node;
 
 	node = *head;
-	i = 0;
-	while (overlap(grid, node) == 0)
+	ix = 0;
+	iy = 0;
+	while (node)
 	{
+		while (outofboundright(node, ix, s) == 0)
+		{
+			if (overlap(grid[iy], node, ix) == 0)
+				grid[iy] = grid[iy] | 
 
+		}
 	}
-
+*/
 
 void	fillit(int fd)
 {

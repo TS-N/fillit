@@ -14,7 +14,7 @@ all : run
 
 run :
 	@echo wrong \
-
+	
 	@echo | ../fillit test01.txt \
 
 	@echo | ../fillit test02.txt \
