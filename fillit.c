@@ -6,183 +6,221 @@
 /*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 20:52:21 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/08/21 20:52:38 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/08/29 23:20:29 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-//BUG WITH 2 '\n' AT THE THE
-
-int		tetisvalid(unsigned long long tet)
+void printBits(size_t const size, void const * const ptr)
 {
-	unsigned long long	valid[19] = {
-										0x8000c0004,
-										0x8000800080008,
-										0xf,
-										0x2000e,
-										0xe0002,
-										0xc00080008,
-										0xc00040004,
-										0xe0008,
-										0x8000e,
-										0xc0006,
-										0x6000c,
-										0xc000c,
-										0x4000c0008,
-										0x40004000c,
-										0x80008000c,
-										0x4000e,
-										0xe0004,
-										0x8000c0008,
-										0x4000c0004
-									};
-	unsigned int		i;
+    unsigned char *b = (unsigned char*) ptr;
+    unsigned char byte;
+    int i, j;
 
+    for (i=size-1;i>=0;i--)
+    {
+        for (j=7;j>=0;j--)
+        {
+            byte = (b[i] >> j) & 1;
+            printf("%u", byte);
+        }
+    }
+    puts("");
+}
+
+void spitresult(tet_list **head, unsigned int s);
+
+
+int		inbound(tet_list *node, unsigned int s)
+{
+	unsigned short i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (i + node->yi >= s && node->tet[i])
+		{
+			ft_flstreset(node);
+			return (0);
+		}
+		++i;
+	}
+	return (1);
+}
+
+int		overlap(unsigned short *grid, tet_list *node)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if ((grid[i + node->yi] & (node->tet[i])))
+			return (0);
+		//printBits(2, (grid) + i);
+		//printf("grid[%u] = %x\n", i + node->yi, grid[i + node->yi]);
+		++i;
+	}
+	return (1);
+}
+
+void	impress(unsigned short *grid, tet_list *node)
+{
+	unsigned	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		grid[i + node->yi] = grid[i + node->yi] | (node->tet[i]);
+		++i;
+	}
+	/*i = 0;
+	while (i < s + 3)
+	{
+		printBits(2, grid + i++);
+	}
+	printf("\n");
+	spitresult(head, s + 3);*/
+}
+
+tet_list	*shift(tet_list *node, unsigned int rbound)
+{
+	unsigned		ybuf;
+
+
+	//printBits(2, &rbound);
+	//printf("before AA = %llx\n", *((unsigned long long *)node->tet));
+	if (((node->tet[0] >> 1) & rbound) || ((node->tet[1] >> 1) & rbound) || ((node->tet[2] >> 1) & rbound) || ((node->tet[3] >> 1) & rbound))
+	{
+		ybuf = node->yi;
+		ft_flstreset(node);
+		node->yi = ++ybuf;
+
+	}
+	else
+	{
+		*(unsigned long long *)(node->tet) = *(unsigned long long *)(node->tet) >> 1;
+		++(node->xi);
+	}
+	//printf("afterAA = %llx\n", *((unsigned long long *)node->tet));
+
+	return (node);
+}
+
+unsigned int		fillgrid(unsigned int *s, tet_list **head, tet_list *node, unsigned short *grd)
+{
+	unsigned short grid[19];
+	int i;
+	unsigned short	rbound;
+
+
+	if (!node)
+		return (1);
 	i = 0;
 	while (i < 19)
 	{
-		if (valid[i] == tet)
-			return (1);
+		grid[i] = grd[i];
 		++i;
+	}
+	rbound = ~0;
+	rbound = rbound >> *s;
+	while (inbound(node, *s))
+	{
+		if (overlap(grid, node))
+		{
+			impress(grid, node);
+			if (fillgrid(s, head, node->next, grid))
+				return (*s);
+		}
+		node = shift(node, rbound);
+				i = 0;
+		while (i < 19)
+		{
+			grid[i] = grd[i];
+			++i;
+		}
+	}
+	ft_flstreset(node);
+	if (node->c == 'A')
+	{
+		++(*s);
+		fillgrid(s, head, node, grid);
+		return (*s);
 	}
 	return (0);
 }
 
-
-int		valid_input(int fd, t_list **head)
+void spitresult(tet_list **head, unsigned int s)
 {
-	char			*line;
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	y;
-	unsigned int	x;
-	unsigned int 	ret;
-	unsigned short	tet[4] = {0, 0, 0, 0};
-	t_list			*node;
-
+	tet_list		*node;
+	unsigned int i;
+	unsigned int j;
+	char			cgrid[16][16] = {{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'}, \
+						{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'}, {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'}, 
+						{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+						{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+						{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+						{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+						{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+						{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'},
+						{'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.'}}; 
+	node = *head;
+	while (node)
+	{
+		cgrid[node->name->y0 + node->yi][node->name->x0 + node->xi] = node->c;
+		cgrid[node->name->y1 + node->yi][node->name->x1 + node->xi] = node->c;
+		cgrid[node->name->y2 + node->yi][node->name->x2 + node->xi] = node->c;
+		cgrid[node->name->y3 + node->yi][node->name->x3 + node->xi] = node->c;
+		node = node->next;
+	}
 	i = 0;
-	j = 0;
-	y = 1;
-	ret = 0;
-	node = NULL;
-	//tetros = "\x5e\xea\x3d\x9d\xd6\xac\xe5\xf1\xba\x76\xad\xe9\x79\xcd\x7a\xb6\xf3\xf0\xda";
-	//head = NULL;
-	//node = head;
-	while (get_next_line(fd, &line) > 0)
+	while (i < s)
 	{
-		if (y % 5 == 0)
+		j = 0;
+		while (j < s)
 		{
-			if (line[0] != '\0'|| (tet[0] == 0 && tet[1] == 0 && tet[2] == 0 && tet[3] == 0))
-				return (1);
-			while(!(tet[0] & 0x8) && !(tet[1] & 0x8) && !(tet[2] & 0x8) && !(tet[3] & 0x8))
-			{
-				tet[0] = tet[0] << 1;
-				tet[1] = tet[1] << 1;
-				tet[2] = tet[2] << 1;
-				tet[3] = tet[3] << 1;
-			}
-			while (!(tet[0]))
-			{
-				tet[0] = tet[1];
-				tet[1] = tet[2];
-				tet[2] = tet[3];
-				tet[3] = 0;
-			}
-			node = ft_lstnew(tet, 8);
-			node->content_size = ret;
-			ft_lstaddend(head, node);
-			//printf("content = %llx\n", *((unsigned long long *)node->content));
-			if (tetisvalid(*((unsigned long long *)node->content)) == 0)
-			{
-				return (-4);
-				//ft_lstdel(head);
-			}
-			tet[0] = 0;
-			tet[1] = 0;
-			tet[2] = 0;
-			tet[3] = 0;
-			++ret;
-			i = 0;
+			ft_putchar(cgrid[i][j]);
 			++j;
-
 		}
-		else
-		{
-			x = 0;
-			if (ft_strlen(line) != 4)
-				return (-9);
-			while (x < 4)
-			{
-				if ((line[x] != '.' && line[x] != '#'))
-					return (1); 
-				tet[i] = tet[i] << 1;
-				if (line[x] == '#')
-					++tet[i];
-				++x;
-			}
-			++i;
-		}
-		free (line);
-		++y;
+		ft_putchar('\n');
+		++i;
 	}
-	if (tet[0] == 0 && tet[1] == 0 && tet[2] == 0 && tet[3] == 0)
-		return (-9);
-	while(!(tet[0] & 0x8) && !(tet[1] & 0x8) && !(tet[2] & 0x8) && !(tet[3] & 0x8))
-	{
-		tet[0] = tet[0] << 1;
-		tet[1] = tet[1] << 1;
-		tet[2] = tet[2] << 1;
-		tet[3] = tet[3] << 1;
-	}
-	while (!(tet[0]))
-	{
-		tet[0] = tet[1];
-		tet[1] = tet[2];
-		tet[2] = tet[3];
-		tet[3] = 0;
-	}
-	node = ft_lstnew(tet, 8);
-	node->content_size = ret;
-	ft_lstaddend(head, node);
-	if (tetisvalid(*((unsigned long long *)node->content)) == 0)
-	{
-		return (-4);
-		//ft_lstdel(head);
-	}
-	++ret;
-	return (ret);
+	ft_putchar('\n');
 }
 
 void	fillit(int fd)
 {
-	char	*line;
 	int		ret;
-	t_list	*head;
-	t_list	*node;
-	int i;
-	char c;
+	unsigned short	grid[19] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	tet_list	*head;
+	tet_list	*node;
+	unsigned int s;
 
-	line = NULL;
-	(void)c;
-	(void)i;
-	(void)node;
+
 	head = NULL;
 	if ((ret = valid_input(fd, &head)) > 0)
 	{
 		printf("Valid input. RET = %i\n", ret);
-		/*node = head;
-		while (node)
+		s = mingridsize(ret);
+		printf("s= %u\n", ret);
+		if ((s = fillgrid(&s, &head, head, grid)))
+		{
+			printf("There is a solution\nS = %u\n", s);
+			node = head;
+			spitresult(&head,s);
+
+		}
+/*		while (node)
 		{
 			i = 0;
-			//printf("0x%llx\n", (*((unsigned long long *)node->content)));
+			printf("0x%llx\n", (*((unsigned long long *)node->tet)));
 			while (i < 4)
 			{
-				printf("content[%d] = %u\np = %p\n", i,(((unsigned short *)node->content)[i]), &(((unsigned short *)node->content)[i]));
+				printf("content[%d] = %u\n", i,((node->tet)[i]));
 				++i;
 			}
-			c = 'A' + node->content_size; 
-			//printf("c = %c\n", c);
+			printf("AAAA = %llx", node->name->id);
+			printf("c = %c\n", node->c); 
 			node = node->next;
 		}*/
 

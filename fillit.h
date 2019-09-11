@@ -15,16 +15,40 @@
 
 # include "libft/includes/libft.h"
 
-typedef struct		a_list 
-{
-	char			c;
-	unsigned short	pos;
-	struct a_list	*next;
-}					f_list;	
 
-f_list		*ft_flstnew(char c, unsigned short pos);
-void	ft_flstaddend(f_list **alst, f_list *new);
-//int		valid_input(int fd, f_list **head);
-void	fillit(int fd);
+typedef struct f_list {
+	unsigned long long  id;
+	unsigned short      x0;
+	unsigned short      y0;
+	unsigned short      x1;
+	unsigned short      y1;
+	unsigned short      x2;
+	unsigned short      y2;
+	unsigned short      x3;
+	unsigned short      y3;
+	struct f_list       *next;
+}               f_list;
+
+typedef struct tet_list {
+	unsigned short		tet[4];
+	struct f_list		*name;
+	char				c;
+	unsigned short		xi;
+	unsigned short		yi;
+	struct tet_list		*next;
+
+}				tet_list;
+
+unsigned	mingridsize(int ret);
+int			valid_input(int fd, tet_list **head);
+void		fillit(int fd);
+void		ft_flstaddend(tet_list **alst, tet_list *new);
+tet_list		*ft_flstnew(char c, unsigned short *tetro);
+void        ft_flstreset(tet_list *tetro);
+
+
+
+
+
 
 #endif

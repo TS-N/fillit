@@ -1,8 +1,8 @@
 #include "fillit.h"
 
-void	ft_flstaddend(f_list **alst, f_list *new)
+void	ft_flstaddend(tet_list **alst, tet_list *new)
 {
-	f_list	*node;
+	tet_list	*node;
 
 	node = *alst;
 	if (node)
