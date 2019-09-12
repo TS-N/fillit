@@ -1,7 +1,7 @@
 NAME = fillit.a
 
-SRC = fillit.c parsetet.c ft_flstaddend.c ft_flstnew.c ft_flstreset.c grid.c
-OBJ = fillit.o parsetet.o ft_flstaddend.o ft_flstnew.o ft_flstreset.o grid.o
+SRC = fillit.c parsetet.c ft_flstaddend.c ft_flstnew.c  ft_flstdel.c ft_flstreset.c grid.c print.c
+OBJ = fillit.o parsetet.o ft_flstaddend.o ft_flstnew.o ft_flstdel.o ft_flstreset.o grid.o print.o
 HEADER = fillit.h
 MAIN = main.c
 CC = gcc

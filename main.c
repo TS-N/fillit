@@ -6,10 +6,12 @@ int		main(int ac, char ** av)
 
 	if (ac == 2)
 	{
-		fd = open(av[1], O_RDONLY);
-		fillit(fd);
+		if((fd = open(av[1], O_RDONLY)) >= 0)
+		{
+			fillit(fd);
+			return (0);
+		}
 	}
-	else
-		ft_putstr("usage:\t/.fillit [source_file]\n");
+	ft_putstr("usage:\t/.fillit [source_file]\n");
 	return (0);
 }

@@ -77,7 +77,7 @@ int		formncmp(unsigned short	tet[4], unsigned int ret, tet_list **head)
 	if (tetrIsvalid(node) == 0)
 	{
 		return (0);
-		//ft_lstdel(head);
+		ft_flstdel(head);
 	}
 	return (1);
 }
@@ -105,6 +105,7 @@ int		valid_input(int fd, tet_list **head)
 				return (-99);
 			if (!(formncmp(tet, ret, head)))
 			{
+				ft_flstdel(head);
 				return (-7);
 			}
 			tet[0] = 0;
@@ -136,6 +137,7 @@ int		valid_input(int fd, tet_list **head)
 	}
 	if (!(formncmp(tet, ret, head)))
 	{
+		ft_flstdel(head);
 		return (-73);
 	}
 	else

@@ -38,13 +38,24 @@ typedef struct tet_list {
 	struct tet_list		*next;
 
 }				tet_list;
+void				ft_flstaddend(tet_list **alst, tet_list *new);
+tet_list			*ft_flstnew(char c, unsigned short *tetro);
+void				ft_flstdel(tet_list **alst);
+void				ft_flstreset(tet_list *tetro);
 
-unsigned	mingridsize(int ret);
-int			valid_input(int fd, tet_list **head);
-void		fillit(int fd);
-void		ft_flstaddend(tet_list **alst, tet_list *new);
-tet_list		*ft_flstnew(char c, unsigned short *tetro);
-void        ft_flstreset(tet_list *tetro);
+unsigned			mingridsize(int ret);
+int					inbound(tet_list *node, unsigned int s);
+int					overlap(unsigned short *grid, tet_list *node);
+void				impress(unsigned short *grid, tet_list *node);
+tet_list			*shift(tet_list *node, unsigned int rbound);
+
+void spitresult(tet_list **head, unsigned int s);
+
+int					valid_input(int fd, tet_list **head);
+
+void				fillit(int fd);
+
+
 
 
 
