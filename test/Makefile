@@ -13,31 +13,18 @@
 all : run
 
 run :
-	@echo wrong \
-	
-	@echo | ../fillit test01.txt \
-
-	@echo | ../fillit test02.txt \
-
-	@echo | ../fillit test03.txt \
-
-	@echo | ../fillit test04.txt \
-
-	@echo | ../fillit test05.txt \
-
-	@echo | ../fillit test06.txt \
-
-	@echo | ../fillit test07.txt \
-
-	@echo | ../fillit test08.txt \
-
-	@echo right \
-
-	@echo | ../fillit eazytest.txt \
-
-	echo | ../fillit eazytest2.txt \
-
-	@echo | ../fillit testr1.txt \
-
+	@echo wrong
+	@echo | ../fillit test01.txt
+	@echo | ../fillit test02.txt
+	@echo | ../fillit test03.txt 
+	@echo | ../fillit test04.txt
+	@echo | ../fillit test05.txt 
+	@echo | ../fillit test06.txt
+	@echo | ../fillit test07.txt
+	@echo | ../fillit test08.txt
+	@echo right
+	@echo | ../fillit eazytest.txt
+	@echo | ../fillit eazytest2.txt
+	@echo | ../fillit testr1.txt
 	@echo | ../fillit testr2.txt
 

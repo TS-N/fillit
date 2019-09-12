@@ -6,26 +6,26 @@
 /*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 20:52:21 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/09/11 05:26:25 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/09/12 04:27:44 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		inbound(tet_list *node, unsigned int s)
+int					inbound(tet_list *node, unsigned int s)
 {
-		if ((node->yi >= s && node->tet[0]) ||
-			(1 + node->yi >= s && node->tet[1]) ||
-			(2 + node->yi >= s && node->tet[2]) ||
-			(3 + node->yi >= s && node->tet[3]))
-		{
-			ft_flstreset(node);
-			return (0);
-		}
+	if ((node->yi >= s && node->tet[0]) || \
+		(1 + node->yi >= s && node->tet[1]) || \
+		(2 + node->yi >= s && node->tet[2]) || \
+		(3 + node->yi >= s && node->tet[3]))
+	{
+		ft_flstreset(node);
+		return (0);
+	}
 	return (1);
 }
 
-int		overlap(unsigned short *grid, tet_list *node)
+int					overlap(unsigned short *grid, tet_list *node)
 {
 	unsigned int	i;
 
@@ -36,17 +36,16 @@ int		overlap(unsigned short *grid, tet_list *node)
 	return (1);
 }
 
-tet_list	*shift(tet_list *node, unsigned int rbound)
+tet_list			*shift(tet_list *node, unsigned int rbound)
 {
 	unsigned		ybuf;
 
 	if (((node->tet[0] >> 1) & rbound) || ((node->tet[1] >> 1) & rbound) || \
-		((node->tet[2] >> 1) & rbound) || ((node->tet[3] >> 1) & rbound))
+			((node->tet[2] >> 1) & rbound) || ((node->tet[3] >> 1) & rbound))
 	{
 		ybuf = node->yi;
 		ft_flstreset(node);
 		node->yi = ++ybuf;
-
 	}
 	else
 	{
@@ -56,8 +55,8 @@ tet_list	*shift(tet_list *node, unsigned int rbound)
 	return (node);
 }
 
-unsigned int		fillgrid(unsigned *s, tet_list **head, tet_list *node, \
-														unsigned short *grd)
+unsigned int		fillgrid(unsigned int *s, tet_list **head, tet_list *node, \
+								unsigned short *grd)
 {
 	unsigned short	grid[16];
 	unsigned int	i;
@@ -93,17 +92,15 @@ unsigned int		fillgrid(unsigned *s, tet_list **head, tet_list *node, \
 	return (0);
 }
 
-
-
-void	fillit(int fd)
+void				fillit(int fd)
 {
-	int		ret;
-	unsigned short	grid[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-	tet_list	*head;
-	tet_list	*node;
-	unsigned int s;
+	int				ret;
+	unsigned short	grid[16];
+	tet_list		*head;
+	tet_list		*node;
+	unsigned int	s;
 
-	
+	ft_bzero(grid, 32);
 	head = NULL;
 	if ((ret = valid_input(fd, &head)) > 0)
 	{
@@ -111,7 +108,7 @@ void	fillit(int fd)
 		if ((s = fillgrid(&s, &head, head, grid)))
 		{
 			node = head;
-			spitresult(&head,s);
+			spitresult(&head, s);
 			ft_flstdel(&head);
 		}
 	}
