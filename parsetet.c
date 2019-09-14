@@ -14,6 +14,7 @@
 
 //BUG WITH 2 '\n' AT THE END
 
+
 struct f_list	f18 = {0x4000c0004000, 0, 1, 1, 0, 1, 1, 1, 2, NULL};
 struct f_list	f17 = {0x8000c0008000, 0, 0, 0, 1, 1, 1, 0, 2, &f18};
 struct f_list	f16 = {0xe0004000, 0, 1, 1, 0, 1, 1, 2, 1, &f17};
@@ -33,7 +34,7 @@ struct f_list	f3 = {0x2000e000, 0, 0, 1, 0, 2, 0, 2, 1, &f4};
 struct f_list	f2 = {0xf000, 0, 0, 1, 0, 2, 0, 3, 0, &f3};
 struct f_list	f1 = {0x8000800080008000, 0, 0, 0, 1, 0, 2, 0, 3, &f2};
 struct f_list	f0 = {0x8000c0004000, 1, 0, 0, 1, 1, 1, 0, 2, &f1};
-
+ 
 int		tetrisvalid(tet_list *ltet)
 {
 	struct f_list				*node;
@@ -64,12 +65,12 @@ int		formncmp(unsigned short tet[4], unsigned int ret, tet_list **head)
 		*(unsigned long long *)tet = *(unsigned long long *)tet >> 16;
 	node = ft_flstnew((ret + 'A'), tet);
 	ft_flstaddend(head, node);
-	if (tetrisvalid(node) == 0)
+	if (!tetrisvalid(node))
 		return (0);
 	return (1);
 }
 
-int		valid_input(int fd, tet_list **head)
+unsigned int		valid_input(int fd, tet_list **head)
 {
 	char			*line;
 	unsigned int	i;
@@ -113,5 +114,8 @@ int		valid_input(int fd, tet_list **head)
 		++y;
 	}
 	(!(formncmp(tet, ret, head))) ? (ret = -73) : ++ret;
+	printf("ret = %u\n", ret);
+	ret = mingridsize(ret, head);
+	printf("s = %u\n", ret);
 	return (ret);
 }

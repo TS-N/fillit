@@ -59,7 +59,7 @@ unsigned int		fillgrid(unsigned int *s, tet_list **head, tet_list *node, \
 								unsigned short *grd)
 {
 	unsigned short	grid[16];
-	unsigned int	i;
+	unsigned short	i;
 	unsigned short	rbound;
 
 	if (!node)
@@ -94,21 +94,19 @@ unsigned int		fillgrid(unsigned int *s, tet_list **head, tet_list *node, \
 
 void				fillit(int fd)
 {
-	int				ret;
+	unsigned int	ret;
 	unsigned short	grid[16];
 	tet_list		*head;
 	tet_list		*node;
-	unsigned int	s;
 
 	ft_bzero(grid, 32);
 	head = NULL;
 	if ((ret = valid_input(fd, &head)) > 0)
 	{
-		s = mingridsize(ret);
-		if ((s = fillgrid(&s, &head, head, grid)))
+		if ((ret = fillgrid(&ret, &head, head, grid)))
 		{
 			node = head;
-			spitresult(&head, s);
+			spitresult(&head, ret);
 			ft_flstdel(&head);
 		}
 	}

@@ -12,13 +12,22 @@
 
 #include "fillit.h"
 
-unsigned int	mingridsize(int ret)
+unsigned int	mingridsize(unsigned int ret, tet_list **head)
 {
 	unsigned int		limit;
+	tet_list			*node;
 
+	node = *head;
 	limit = 2;
-	while (limit * limit < (unsigned int)ret * 4)
+	while (limit * limit < ret * 4)
 		++limit;
+/* 	while (node->next)
+	{
+		if ((*head)->name != node->next->name || \
+			*((unsigned long long *)(*head)->tet) == 0xf000)
+			return (limit);
+		node = node->next;
+	}*/
 	return (limit);
 }
 
