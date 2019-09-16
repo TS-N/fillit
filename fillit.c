@@ -99,7 +99,7 @@ void				fillit(int fd)
 	tet_list		*head;
 	tet_list		*node;
 
-	ft_bzero(grid, 32);
+
 	head = NULL;
 	if ((ret = valid_input(fd, &head)) > 0)
 	{
@@ -107,10 +107,13 @@ void				fillit(int fd)
 		{
 			node = head;
 			spitresult(&head, ret);
-			ft_flstdel(&head);
+			ft_flstdel(head);
 		}
 	}
 	else
+	{
+		ft_flstdel(head);
 		printf("Invalid input.\nRet =%d\n", ret);
+	}
 	return ;
 }

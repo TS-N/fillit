@@ -21,9 +21,10 @@ int		main(int ac, char **av)
 		if ((fd = open(av[1], O_RDONLY)) >= 0)
 		{
 			fillit(fd);
+			close(fd);
 			return (0);
 		}
-		close(fd);
+		ft_putstr("error:\tInvalid file\nusage:\t/.fillit [valid_file]\n");
 	}
 	ft_putstr("usage:\t/.fillit [source_file]\n");
 	return (0);

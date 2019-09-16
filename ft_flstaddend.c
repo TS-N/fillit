@@ -29,4 +29,3 @@ void		ft_flstaddend(tet_list **alst, tet_list *new)
 	new->next = NULL;
 	return ;
 }
-

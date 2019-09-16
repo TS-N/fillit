@@ -28,20 +28,20 @@ typedef struct				f_list {
 	struct f_list			*next;
 }							f_list;
 
-typedef struct			tet_list {
-	unsigned short		tet[4];
-	struct f_list		*name;
-	char				c;
-	unsigned short		xi;
-	unsigned short		yi;
-	struct tet_list		*next;
+typedef struct				tet_list {
+	unsigned short			tet[4];
+	struct f_list			*name;
+	char					c;
+	unsigned short			xi;
+	unsigned short			yi;
+	struct tet_list			*next;
 
-}						tet_list;
+}							tet_list;
 
 
 void				ft_flstaddend(tet_list **alst, tet_list *new);
 tet_list			*ft_flstnew(char c, unsigned short *tetro);
-void				ft_flstdel(tet_list **alst);
+void				ft_flstdel(tet_list *alst);
 void				ft_flstreset(tet_list *tetro);
 
 unsigned int		mingridsize(unsigned int ret, tet_list **head);

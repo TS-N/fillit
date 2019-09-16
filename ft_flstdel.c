@@ -12,13 +12,13 @@
 
 #include "fillit.h"
 
-void	ft_flstdel(tet_list **alst)
+void	ft_flstdel(tet_list *alst)
 {
-	if (!(*alst))
+	if (!alst)
 		return ;
-	if ((*alst)->next)
-		ft_flstdel(&((*alst)->next));
-	free(*alst);
-	*alst = NULL;
+	if (alst->next)
+		ft_flstdel((alst->next));
+	free(alst);
+	alst = NULL;
 	return ;
 }
