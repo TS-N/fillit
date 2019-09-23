@@ -113,6 +113,7 @@ void				fillit(int fd)
 	}
 	else
 	{
+		printf("ret = %d\n", ret);
 		ft_flstdel(head);
 		ft_putstr("error:\tinvalid file\n");
 	}

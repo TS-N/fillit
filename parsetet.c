@@ -34,7 +34,7 @@ struct f_list	f0 = {0x8000c0004000, 1, 0, 0, 1, 1, 1, 0, 2, &f1};
  
 int		tetrisvalid(tet_list *ltet)
 {
-	struct f_list				*node;
+	struct		f_list		*node;
 
 	node = &f0;
 	while (node)
@@ -54,7 +54,7 @@ int		formncmp(unsigned short tet[4], unsigned int ret, tet_list **head)
 	tet_list		*node;
 
 	if (!(tet[0] || tet[1] || tet[2] || tet[3]))
-		return (-98);
+		return (-1);
 	while (!(tet[0] & 0x8000) && !(tet[1] & 0x8000) && !(tet[2] & 0x8000) \
 			&& !(tet[3] & 0x8000))
 		*(unsigned long long *)tet = *(unsigned long long *)tet << 1;
@@ -67,14 +67,50 @@ int		formncmp(unsigned short tet[4], unsigned int ret, tet_list **head)
 	return (1);
 }
 
+int		err(char *line, unsigned short *tet, tet_list **head, int ret)
+{
+	int		i;
+
+	if (ret <= 0)
+	{
+		i = -1;
+		if (ft_strlen(line) != 4)
+		{
+			free(line);
+			return (-1);
+		}
+		while (++i < 4)
+		{
+			(*tet) = (*tet) << 1;
+			if (line[i] == '#')
+					++(*tet);
+			else if ((line[i] != '.'))
+			{
+				free(line);
+				return (-2);
+			}	
+		}
+	}
+	else
+	{
+		if ((line[0] || !(*(unsigned long long *)tet) )|| \
+			!(formncmp(tet, ret - 1, head)) || ret > 26)
+		{
+			free(line);
+			return (-3);
+		}
+	}
+	return (0);
+}
+
 int		valid_input(int fd, tet_list **head)
 {
 	char			*line;
 	unsigned int	i;
 	unsigned int	y;
-	unsigned int	x;
 	int				ret;
 	unsigned short	tet[4];
+	int sup;
 
 	i = 0;
 	y = 1;
@@ -84,38 +120,16 @@ int		valid_input(int fd, tet_list **head)
 	{
 		if (y % 5 == 0)
 		{
-			if ((line[0] || !(*(unsigned long long *)tet) )|| !(formncmp(tet, ret, head)))
-			{
-				free(line);
-				return (-1);
-			}
+			if ((sup = err(line, tet, head, ret + 1)) < 0)
+				return (sup);
 			*(unsigned long long *)tet = 0;
 			i = 0;
-			if (++ret > 26)
-			{
-				free(line);
-				return (-2);
-			}
+			++ret;
 		}
 		else
 		{
-			x = -1;
-			if (ft_strlen(line) != 4)
-			{
-				free(line);
-				return (-9);
-			}
-			while (++x < 4)
-			{
-				if ((line[x] != '.' && line[x] != '#'))
-				{
-					free(line);
-					return (-5);
-				}
-				tet[i] = tet[i] << 1;
-				if (line[x] == '#')
-					++tet[i];
-			}
+			if ((sup = err(line, (tet + i), head, -ret)) < 0)
+				return (sup);
 			++i;
 		}
 		free(line);
@@ -123,7 +137,7 @@ int		valid_input(int fd, tet_list **head)
 	}
 	if ((y - 1) % 5 == 0)
 		return (-1);
-	(!(formncmp(tet, ret, head))) ? (ret = -73) : ++ret;
+	(!(formncmp(tet, ret + 1 , head))) ? (ret = -1) : ++ret;
 	ret = mingridsize(ret, head);
 	return (ret);
 }
