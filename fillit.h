@@ -50,9 +50,9 @@ int					overlap(unsigned short *grid, tet_list *node);
 void				impress(unsigned short *grid, tet_list *node);
 tet_list			*shift(tet_list *node, unsigned int rbound);
 
-void spitresult(tet_list **head, unsigned int s);
+void				spitresult(tet_list **head, unsigned int s);
 
-unsigned int		valid_input(int fd, tet_list **head);
+int					valid_input(int fd, tet_list **head);
 
 void				fillit(int fd);
 

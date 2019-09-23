@@ -21,13 +21,6 @@ unsigned int	mingridsize(unsigned int ret, tet_list **head)
 	limit = 2;
 	while (limit * limit < ret * 4)
 		++limit;
-/* 	while (node->next)
-	{
-		if ((*head)->name != node->next->name || \
-			*((unsigned long long *)(*head)->tet) == 0xf000)
-			return (limit);
-		node = node->next;
-	}*/
 	return (limit);
 }
 

@@ -22,10 +22,12 @@ int		main(int ac, char **av)
 		{
 			fillit(fd);
 			close(fd);
+			system("leaks fillit");
 			return (0);
 		}
-		ft_putstr("error:\tInvalid file\nusage:\t/.fillit [valid_file]\n");
+		ft_putstr("error:\tInvalid file\n");
 	}
-	ft_putstr("usage:\t/.fillit [source_file]\n");
+	ft_putstr("usage:\t./fillit [source_file]\n");
+	system("leaks fillit");
 	return (0);
 }

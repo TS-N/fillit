@@ -17,11 +17,11 @@ void		spitresult(tet_list **head, unsigned int s)
 	tet_list		*node;
 	unsigned int	i;
 	unsigned int	j;
-	char			grid[s][s];
+	char			grid[16][16];
 	char			c;
 
 	node = *head;
-	ft_bzero(grid, s * s);
+	ft_bzero(grid, 16 * 16);
 	while (node)
 	{
 		c = node->c;
@@ -45,4 +45,5 @@ void		spitresult(tet_list **head, unsigned int s)
 	}
 	if (node)
 		ft_putchar('\n');
+	return ;
 }

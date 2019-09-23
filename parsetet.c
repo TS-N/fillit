@@ -12,9 +12,6 @@
 
 #include "fillit.h"
 
-//BUG WITH 2 '\n' AT THE END
-
-
 struct f_list	f18 = {0x4000c0004000, 0, 1, 1, 0, 1, 1, 1, 2, NULL};
 struct f_list	f17 = {0x8000c0008000, 0, 0, 0, 1, 1, 1, 0, 2, &f18};
 struct f_list	f16 = {0xe0004000, 0, 1, 1, 0, 1, 1, 2, 1, &f17};
@@ -70,13 +67,13 @@ int		formncmp(unsigned short tet[4], unsigned int ret, tet_list **head)
 	return (1);
 }
 
-unsigned int		valid_input(int fd, tet_list **head)
+int		valid_input(int fd, tet_list **head)
 {
 	char			*line;
 	unsigned int	i;
 	unsigned int	y;
 	unsigned int	x;
-	unsigned int	ret;
+	int				ret;
 	unsigned short	tet[4];
 
 	i = 0;
@@ -87,23 +84,34 @@ unsigned int		valid_input(int fd, tet_list **head)
 	{
 		if (y % 5 == 0)
 		{
-			if (line[0] || !(*(unsigned long long *)tet))
-				return (-99);
-			if (!(formncmp(tet, ret, head)))
-				return (-7);
+			if ((line[0] || !(*(unsigned long long *)tet) )|| !(formncmp(tet, ret, head)))
+			{
+				free(line);
+				return (-1);
+			}
 			*(unsigned long long *)tet = 0;
 			i = 0;
-			++ret;
+			if (++ret > 26)
+			{
+				free(line);
+				return (-2);
+			}
 		}
 		else
 		{
 			x = -1;
 			if (ft_strlen(line) != 4)
+			{
+				free(line);
 				return (-9);
+			}
 			while (++x < 4)
 			{
 				if ((line[x] != '.' && line[x] != '#'))
-					return (1);
+				{
+					free(line);
+					return (-5);
+				}
 				tet[i] = tet[i] << 1;
 				if (line[x] == '#')
 					++tet[i];
@@ -113,9 +121,9 @@ unsigned int		valid_input(int fd, tet_list **head)
 		free(line);
 		++y;
 	}
+	if ((y - 1) % 5 == 0)
+		return (-1);
 	(!(formncmp(tet, ret, head))) ? (ret = -73) : ++ret;
-	printf("ret = %u\n", ret);
 	ret = mingridsize(ret, head);
-	printf("s = %u\n", ret);
 	return (ret);
 }

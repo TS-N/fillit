@@ -55,11 +55,11 @@ tet_list			*shift(tet_list *node, unsigned int rbound)
 	return (node);
 }
 
-unsigned int		fillgrid(unsigned int *s, tet_list **head, tet_list *node, \
+int		fillgrid(int *s, tet_list **head, tet_list *node, \
 								unsigned short *grd)
 {
 	unsigned short	grid[16];
-	unsigned short	i;
+	int				i;
 	unsigned short	rbound;
 
 	if (!node)
@@ -94,13 +94,14 @@ unsigned int		fillgrid(unsigned int *s, tet_list **head, tet_list *node, \
 
 void				fillit(int fd)
 {
-	unsigned int	ret;
+	int				ret;
 	unsigned short	grid[16];
 	tet_list		*head;
 	tet_list		*node;
 
 
 	head = NULL;
+	ft_bzero(grid, 32);
 	if ((ret = valid_input(fd, &head)) > 0)
 	{
 		if ((ret = fillgrid(&ret, &head, head, grid)))
@@ -113,7 +114,7 @@ void				fillit(int fd)
 	else
 	{
 		ft_flstdel(head);
-		printf("Invalid input.\nRet =%d\n", ret);
+		ft_putstr("error:\tinvalid file\n");
 	}
 	return ;
 }
