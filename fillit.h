@@ -15,7 +15,7 @@
 
 # include "libft/includes/libft.h"
 
-typedef struct				f_list {
+typedef struct				s_f {
 	unsigned long long		id;
 	unsigned short			x0;
 	unsigned short			y0;
@@ -25,35 +25,36 @@ typedef struct				f_list {
 	unsigned short			y2;
 	unsigned short			x3;
 	unsigned short			y3;
-	struct f_list			*next;
-}							f_list;
+	struct s_f				*next;
+}							t_f;
 
-typedef struct				tet_list {
+typedef struct				s_tet {
 	unsigned short			tet[4];
-	struct f_list			*name;
+	t_f						*name;
 	char					c;
 	unsigned short			xi;
 	unsigned short			yi;
-	struct tet_list			*next;
+	struct s_tet			*next;
 
-}							tet_list;
+}							t_tet;
 
+void						ft_flstaddend(t_tet **alst, t_tet *new);
+t_tet						*ft_flstnew(char c, unsigned short *tetro);
+void						ft_flstdel(t_tet *alst);
+void						ft_flstreset(t_tet *tetro);
 
-void				ft_flstaddend(tet_list **alst, tet_list *new);
-tet_list			*ft_flstnew(char c, unsigned short *tetro);
-void				ft_flstdel(tet_list *alst);
-void				ft_flstreset(tet_list *tetro);
+void						tynorm(unsigned short grid[16], \
+									unsigned short *grd, int s, int i);
+int							mingridsize(int ret, t_tet **head);
+int							inbound(t_tet *node, unsigned int s);
+int							overlap(unsigned short *grid, t_tet *node);
+void						impress(unsigned short *grid, t_tet *node);
+t_tet						*shift(t_tet *node, int s);
 
-int					mingridsize(int ret, tet_list **head);
-int					inbound(tet_list *node, unsigned int s);
-int					overlap(unsigned short *grid, tet_list *node);
-void				impress(unsigned short *grid, tet_list *node);
-tet_list			*shift(tet_list *node, unsigned int rbound);
+void						spitresult(t_tet **head, unsigned int s);
 
-void				spitresult(tet_list **head, unsigned int s);
+int							valid_input(int fd, t_tet **head);
 
-int					valid_input(int fd, tet_list **head);
-
-void				fillit(int fd);
+void						fillit(int fd);
 
 #endif

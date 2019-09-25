@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-void	ft_flstdel(tet_list *alst)
+void	ft_flstdel(t_tet *alst)
 {
 	if (!alst)
 		return ;

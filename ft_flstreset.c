@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-void	ft_flstreset(tet_list *tetro)
+void	ft_flstreset(t_tet *tetro)
 {
 	*((unsigned long long *)tetro->tet) = tetro->name->id;
 	tetro->xi = 0;

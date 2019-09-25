@@ -12,11 +12,11 @@
 
 #include "fillit.h"
 
-tet_list		*ft_flstnew(char c, unsigned short *tetro)
+t_tet		*ft_flstnew(char c, unsigned short *tetro)
 {
-	tet_list		*link;
+	t_tet		*link;
 
-	link = (tet_list *)ft_memalloc(sizeof(tet_list));
+	link = (t_tet *)ft_memalloc(sizeof(t_tet));
 	if (link == NULL)
 		return (NULL);
 	link->tet[0] = tetro[0];

@@ -12,15 +12,10 @@
 
 #include "fillit.h"
 
-void		spitresult(tet_list **head, unsigned int s)
+void		gfill(t_tet *node, char grid[16][16])
 {
-	tet_list		*node;
-	unsigned int	i;
-	unsigned int	j;
-	char			grid[16][16];
-	char			c;
+	char		c;
 
-	node = *head;
 	ft_bzero(grid, 16 * 16);
 	while (node)
 	{
@@ -31,6 +26,18 @@ void		spitresult(tet_list **head, unsigned int s)
 		grid[node->name->y3 + node->yi][node->name->x3 + node->xi] = c;
 		node = node->next;
 	}
+	return ;
+}
+
+void		spitresult(t_tet **head, unsigned int s)
+{
+	t_tet			*node;
+	unsigned int	i;
+	unsigned int	j;
+	char			grid[16][16];
+
+	node = *head;
+	gfill(node, grid);
 	i = 0;
 	while (i < s)
 	{

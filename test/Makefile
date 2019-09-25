@@ -13,18 +13,18 @@
 all : run
 
 run :
-	@echo wrong
-	@echo | ../fillit test01.txt
-	@echo | ../fillit test02.txt
-	@echo | ../fillit test03.txt
-	@echo | ../fillit test04.txt
-	@echo | ../fillit test05.txt
-	@echo | ../fillit test06.txt
-	@echo | ../fillit test07.txt
-	@echo | ../fillit test08.txt
-	@echo right
-	@echo | ../fillit eazytest.txt
-	@echo | ../fillit eazytest2.txt
-	@echo | ../fillit testr1.txt
-	@echo | ../fillit testr2.txt
+	@echo wrong\n
+	../fillit noNL.txt
+	../fillit onlyNL.txt
+	../fillit twoNL.txt
+	../fillit falsetet.txt
+	../fillit falsetet2.txt
+	../fillit 3dotline.txt
+	../fillit 3linesbloc.txt
+	../fillit emptytet.txt
+	@echo right\n
+	../fillit sqanswer.txt
+	../fillit alldifftet.txt
+	../fillit cubes.txt
+	../fillit lines.txt
 

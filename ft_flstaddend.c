@@ -12,16 +12,15 @@
 
 #include "fillit.h"
 
-void		ft_flstaddend(tet_list **alst, tet_list *new)
+void		ft_flstaddend(t_tet **alst, t_tet *new)
 {
-	tet_list	*node;
+	t_tet	*node;
 
 	node = *alst;
 	if (node)
 	{
 		while (node->next)
 			node = node->next;
-
 		node->next = new;
 	}
 	else

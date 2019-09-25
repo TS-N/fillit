@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-int					inbound(tet_list *node, unsigned int s)
+int					inbound(t_tet *node, unsigned int s)
 {
 	if ((node->yi >= s && node->tet[0]) || \
 		(1 + node->yi >= s && node->tet[1]) || \
@@ -25,7 +25,7 @@ int					inbound(tet_list *node, unsigned int s)
 	return (1);
 }
 
-int					overlap(unsigned short *grid, tet_list *node)
+int					overlap(unsigned short *grid, t_tet *node)
 {
 	unsigned int	i;
 
@@ -36,39 +36,36 @@ int					overlap(unsigned short *grid, tet_list *node)
 	return (1);
 }
 
-tet_list			*shift(tet_list *node, unsigned int rbound)
+t_tet				*shift(t_tet *n, int s)
 {
 	unsigned		ybuf;
+	unsigned short	rbound;
 
-	if (((node->tet[0] >> 1) & rbound) || ((node->tet[1] >> 1) & rbound) || \
-			((node->tet[2] >> 1) & rbound) || ((node->tet[3] >> 1) & rbound))
+	rbound = ~0;
+	rbound = rbound >> s;
+	if (((n->tet[0] >> 1) & rbound) || ((n->tet[1] >> 1) & rbound) || \
+			((n->tet[2] >> 1) & rbound) || ((n->tet[3] >> 1) & rbound))
 	{
-		ybuf = node->yi;
-		ft_flstreset(node);
-		node->yi = ++ybuf;
+		ybuf = n->yi;
+		ft_flstreset(n);
+		n->yi = ++ybuf;
 	}
 	else
 	{
-		*(unsigned long long *)(node->tet) = *(unsigned long long *)(node->tet) >> 1;
-		++(node->xi);
+		*(unsigned long long *)(n->tet) = *(unsigned long long *)(n->tet) >> 1;
+		++(n->xi);
 	}
-	return (node);
+	return (n);
 }
 
-int		fillgrid(int *s, tet_list **head, tet_list *node, \
-								unsigned short *grd)
+int					fillgrid(int *s, t_tet **head, t_tet *node, \
+					unsigned short *grd)
 {
 	unsigned short	grid[16];
-	int				i;
-	unsigned short	rbound;
 
 	if (!node)
 		return (1);
-	i = -1;
-	while (++i < *s)
-		grid[i] = grd[i];
-	rbound = ~0;
-	rbound = rbound >> *s;
+	tynorm(grid, grd, *s, -1);
 	while (inbound(node, *s))
 	{
 		if (overlap(grid, node))
@@ -77,10 +74,8 @@ int		fillgrid(int *s, tet_list **head, tet_list *node, \
 			if (fillgrid(s, head, node->next, grid))
 				return (*s);
 		}
-		node = shift(node, rbound);
-		i = -1;
-		while (++i < *s)
-			grid[i] = grd[i];
+		node = shift(node, *s);
+		tynorm(grid, grd, *s, -1);
 	}
 	ft_flstreset(node);
 	if (node->c == 'A')
@@ -96,9 +91,8 @@ void				fillit(int fd)
 {
 	int				ret;
 	unsigned short	grid[16];
-	tet_list		*head;
-	tet_list		*node;
-
+	t_tet			*head;
+	t_tet			*node;
 
 	head = NULL;
 	ft_bzero(grid, 32);
@@ -108,14 +102,10 @@ void				fillit(int fd)
 		{
 			node = head;
 			spitresult(&head, ret);
-			ft_flstdel(head);
 		}
 	}
 	else
-	{
-		printf("ret = %d\n", ret);
-		ft_flstdel(head);
 		ft_putstr("error:\tinvalid file\n");
-	}
+	ft_flstdel(head);
 	return ;
 }

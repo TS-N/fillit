@@ -12,10 +12,16 @@
 
 #include "fillit.h"
 
-int				mingridsize(int ret, tet_list **head)
+void		tynorm(unsigned short grid[16], unsigned short *grd, int s, int i)
+{
+	while (++i < s)
+		grid[i] = grd[i];
+}
+
+int			mingridsize(int ret, t_tet **head)
 {
 	int					limit;
-	tet_list			*node;
+	t_tet				*node;
 
 	node = *head;
 	limit = 2;
@@ -26,7 +32,7 @@ int				mingridsize(int ret, tet_list **head)
 	return (limit);
 }
 
-void			impress(unsigned short *grid, tet_list *node)
+void		impress(unsigned short *grid, t_tet *node)
 {
 	unsigned short	y;
 
