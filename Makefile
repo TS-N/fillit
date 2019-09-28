@@ -36,6 +36,6 @@ re: fclean all
 debug:
 	$(CC) -g $(CFLAGS) $(MAIN) $(OBJ) -o fillit -I $(HEADER) $(ARCH)
 
-test :
+test:
 	make mfillit
 	make run  -C test/

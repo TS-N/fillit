@@ -65,7 +65,7 @@ int					fillgrid(int *s, t_tet **head, t_tet *node, \
 
 	if (!node)
 		return (1);
-	tynorm(grid, grd, *s, -1);
+	arcpy(grid, grd, *s, -1);
 	while (inbound(node, *s))
 	{
 		if (overlap(grid, node))
@@ -75,7 +75,7 @@ int					fillgrid(int *s, t_tet **head, t_tet *node, \
 				return (*s);
 		}
 		node = shift(node, *s);
-		tynorm(grid, grd, *s, -1);
+		arcpy(grid, grd, *s, -1);
 	}
 	ft_flstreset(node);
 	if (node->c == 'A')
@@ -96,8 +96,10 @@ void				fillit(int fd)
 
 	head = NULL;
 	ft_bzero(grid, 32);
-	if ((ret = valid_input(fd, &head)) > 0)
+	ret = 0;
+	if ((ret = valid_input(fd, &head, &ret)) > 0)
 	{
+		ret = mingridsize(ret, &head);
 		if ((ret = fillgrid(&ret, &head, head, grid)))
 		{
 			node = head;

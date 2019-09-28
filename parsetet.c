@@ -49,12 +49,12 @@ int		tetrisvalid(t_tet *ltet)
 	return (0);
 }
 
-int		formncmp(unsigned short tet[4], unsigned int ret, t_tet **head)
+int		formncmp(unsigned short tet[4], int ret, t_tet **head)
 {
 	t_tet		*node;
 
-	if (!(tet[0] || tet[1] || tet[2] || tet[3]))
-		return (-1);
+	if (!(tet[0] || tet[1] || tet[2] || tet[3]) || ret > 26)
+		return (0);
 	while (!(tet[0] & 0x8000) && !(tet[1] & 0x8000) && !(tet[2] & 0x8000) \
 			&& !(tet[3] & 0x8000))
 		*(unsigned long long *)tet = *(unsigned long long *)tet << 1;
@@ -70,14 +70,12 @@ int		formncmp(unsigned short tet[4], unsigned int ret, t_tet **head)
 int		err(char *line, unsigned short *tet, t_tet **head, int ret)
 {
 	int		i;
-	int		r;
 
-	r = 0;
 	if (ret <= 0)
 	{
 		i = -1;
 		if (ft_strlen(line) != 4)
-			r = -1;
+			return (-1);
 		else
 			while (++i < 4)
 			{
@@ -85,51 +83,52 @@ int		err(char *line, unsigned short *tet, t_tet **head, int ret)
 				if (line[i] == '#')
 					++(*tet);
 				else if ((line[i] != '.'))
-					r = -1;
+					return (-1);
 			}
 	}
 	else
 	{
 		if (line[0] || !(*(unsigned long long *)tet) || \
-		!(formncmp(tet, ret - 1, head)) || ret > 26)
-			r = -1;
+		!(formncmp(tet, ret - 1, head)))
+			return (-1);
 	}
-	return (r);
+	return (0);
 }
 
-int		valid_input(int fd, t_tet **head)
+void	tynorm(void *ptr, void *ptr2, size_t size2, int *ret)
+{
+	if (ptr)
+		ft_bzero(ptr, 8);
+	if (ptr2)
+		ft_bzero(ptr2, size2);
+	if (ret)
+		++*ret;
+}
+
+int		valid_input(int fd, t_tet **head, int *ret)
 {
 	char			*line;
-	unsigned int	i;
 	unsigned int	y;
-	int				ret;
 	unsigned short	tet[4];
 
-	i = 0;
-	y = 1;
-	ret = 0;
-	ft_bzero(tet, 8);
+	tynorm(tet, &y, 4, NULL);
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (y % 5 == 0)
+		if (++y % 5 == 0)
 		{
-			if (err(line, tet, head, ret + 1) < 0)
+			if (err(line, tet, head, *ret + 1) < 0)
 				return (-1);
-			*(unsigned long long *)tet = 0;
-			i = 0;
-			++ret;
+			tynorm(tet, &y, 4, ret);
 		}
 		else
 		{
-			if (err(line, (tet + i++), head, -ret) < 0)
+			if (err(line, (tet + (y - 1)), head, -*ret) < 0)
 				return (-1);
 		}
 		free(line);
-		++y;
 	}
-	if ((y - 1) % 5 == 0)
+	(!(formncmp(tet, *ret, head))) ? (*ret = -1) : ++*ret;
+	if ((y - 1) % 5 == 0 || *ret > 26)
 		return (-1);
-	(!(formncmp(tet, ret + 1, head))) ? (ret = -1) : ++ret;
-	ret = mingridsize(ret, head);
-	return (ret);
+	return (*ret);
 }

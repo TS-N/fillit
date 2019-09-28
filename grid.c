@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-void		tynorm(unsigned short grid[16], unsigned short *grd, int s, int i)
+void		arcpy(unsigned short grid[16], unsigned short *grd, int s, int i)
 {
 	while (++i < s)
 		grid[i] = grd[i];
@@ -20,25 +20,39 @@ void		tynorm(unsigned short grid[16], unsigned short *grd, int s, int i)
 
 int			mingridsize(int ret, t_tet **head)
 {
-	int					limit;
-	t_tet				*node;
+	int					l;
+	t_tet				*n;
 
-	node = *head;
-	limit = 2;
-	if (ret < 0)
-		return (-1);
-	while (limit * limit < ret * 4)
-		++limit;
-	return (limit);
+	n = *head;
+	l = 2;
+	if (ret == 1)
+	{
+		if (*(unsigned long long *)n->tet == 0x4000e000)
+			l = 3;
+		else
+			l = n->name->x3 > n->name->y3 ? n->name->x3 + 1 : n->name->y3 + 1;
+	}
+	else
+	{
+		while (l * l < ret * 4)
+			++l;
+	}
+	while (n)
+	{
+		if (n->name->id != 0xc000c000 || l * l == ret * 4 )
+			return (l);
+		n = n->next;
+	}
+	return (l + 1);
 }
 
-void		impress(unsigned short *grid, t_tet *node)
+void		impress(unsigned short *grid, t_tet *n)
 {
 	unsigned short	y;
 
-	y = node->yi;
-	grid[0 + y] = grid[0 + y] | (node->tet[0]);
-	grid[1 + y] = grid[1 + y] | (node->tet[1]);
-	grid[2 + y] = grid[2 + y] | (node->tet[2]);
-	grid[3 + y] = grid[3 + y] | (node->tet[3]);
+	y = n->yi;
+	grid[0 + y] = grid[0 + y] | (n->tet[0]);
+	grid[1 + y] = grid[1 + y] | (n->tet[1]);
+	grid[2 + y] = grid[2 + y] | (n->tet[2]);
+	grid[3 + y] = grid[3 + y] | (n->tet[3]);
 }

@@ -24,8 +24,9 @@ int		main(int ac, char **av)
 			close(fd);
 			return (0);
 		}
-		ft_putstr("error:\tInvalid file\n");
+		ft_putstr("error\n");
 	}
-	ft_putstr("usage:\t./fillit [source_file]\n");
+	else
+		ft_putstr("usage:\t./fillit [source_file]\n");
 	return (0);
 }

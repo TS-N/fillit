@@ -43,7 +43,7 @@ t_tet						*ft_flstnew(char c, unsigned short *tetro);
 void						ft_flstdel(t_tet *alst);
 void						ft_flstreset(t_tet *tetro);
 
-void						tynorm(unsigned short grid[16], \
+void						arcpy(unsigned short grid[16], \
 									unsigned short *grd, int s, int i);
 int							mingridsize(int ret, t_tet **head);
 int							inbound(t_tet *node, unsigned int s);
@@ -53,7 +53,7 @@ t_tet						*shift(t_tet *node, int s);
 
 void						spitresult(t_tet **head, unsigned int s);
 
-int							valid_input(int fd, t_tet **head);
+int							valid_input(int fd, t_tet **head, int *ret);
 
 void						fillit(int fd);
 

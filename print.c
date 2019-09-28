@@ -37,7 +37,7 @@ void		spitresult(t_tet **head, unsigned int s)
 	char			grid[16][16];
 
 	node = *head;
-	gfill(node, grid);
+	gfill(*head, grid);
 	i = 0;
 	while (i < s)
 	{
@@ -50,7 +50,5 @@ void		spitresult(t_tet **head, unsigned int s)
 		ft_putchar('\n');
 		++i;
 	}
-	if (node)
-		ft_putchar('\n');
 	return ;
 }
