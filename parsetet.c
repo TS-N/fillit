@@ -75,7 +75,7 @@ int		err(char *line, unsigned short *tet, t_tet **head, int ret)
 	{
 		i = -1;
 		if (ft_strlen(line) != 4)
-			return (-1);
+			ret = 64;
 		else
 			while (++i < 4)
 			{
@@ -83,16 +83,17 @@ int		err(char *line, unsigned short *tet, t_tet **head, int ret)
 				if (line[i] == '#')
 					++(*tet);
 				else if ((line[i] != '.'))
-					return (-1);
+					ret = 64;
 			}
 	}
 	else
 	{
 		if (line[0] || !(*(unsigned long long *)tet) || \
 		!(formncmp(tet, ret - 1, head)))
-			return (-1);
+			ret = 64;
 	}
-	return (0);
+	free(line);
+	return (ret == 64 ? -1 : 0);
 }
 
 void	tynorm(void *ptr, void *ptr2, size_t size2, int *ret)
@@ -125,7 +126,6 @@ int		valid_input(int fd, t_tet **head, int *ret)
 			if (err(line, (tet + (y - 1)), head, -*ret) < 0)
 				return (-1);
 		}
-		free(line);
 	}
 	(!(formncmp(tet, *ret, head))) ? (*ret = -1) : ++*ret;
 	if ((y - 1) % 5 == 0 || *ret > 26)

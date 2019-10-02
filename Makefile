@@ -34,6 +34,7 @@ fclean: clean
 re: fclean all
 
 debug:
+	$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
 	$(CC) -g $(CFLAGS) $(MAIN) $(OBJ) -o fillit -I $(HEADER) $(ARCH)
 
 test:

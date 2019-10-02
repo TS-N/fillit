@@ -22,11 +22,13 @@ int		main(int ac, char **av)
 		{
 			fillit(fd);
 			close(fd);
+			//system("leaks fillit");
 			return (0);
 		}
 		ft_putstr("error\n");
 	}
 	else
 		ft_putstr("usage:\t./fillit [source_file]\n");
+	//system("leaks fillit");
 	return (0);
 }
