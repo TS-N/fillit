@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grid.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 03:33:18 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/09/12 03:45:30 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/10/18 18:20:00 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			mingridsize(int ret, t_tet **head)
 	}
 	while (n)
 	{
-		if (n->name->id != 0xc000c000 || l * l == ret * 4 )
+		if (n->name->id != 0xc000c000 || l * l == ret * 4)
 			return (l);
 		n = n->next;
 	}
