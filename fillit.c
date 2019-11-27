@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 20:52:21 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/09/12 04:27:44 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/11/11 00:09:39 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "./include/fillit.h"
 
 int					inbound(t_tet *node, unsigned int s)
 {
@@ -81,7 +81,7 @@ int					fillgrid(int *s, t_tet **head, t_tet *node, \
 	if (node->c == 'A')
 	{
 		++(*s);
-		fillgrid(s, head, node, grid);
+		fillgrid(s, head, node, grd);
 		return (*s);
 	}
 	return (0);
@@ -107,7 +107,7 @@ void				fillit(int fd)
 		}
 	}
 	else
-		ft_putstr("error:\tinvalid file\n");
+		ft_putstr("error\n");
 	ft_flstdel(head);
 	return ;
 }

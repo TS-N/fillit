@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 13:48:29 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/08/02 14:12:33 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/11/06 01:51:34 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 size_t		ft_intlen(int n)
 {

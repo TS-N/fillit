@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 05:37:28 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/09/12 03:53:17 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/11/11 00:09:47 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "./include/fillit.h"
 
 void		gfill(t_tet *node, char grid[16][16])
 {

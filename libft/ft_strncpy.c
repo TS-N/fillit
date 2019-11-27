@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 20:26:56 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/08/05 20:32:35 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/11/06 01:51:34 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strncpy(char *dest, const char *src, size_t len)
 {

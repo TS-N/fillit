@@ -1,14 +1,14 @@
-NAME = fillit.a
+NAME = fillit
 
 SRC = fillit.c parsetet.c ft_flstaddend.c ft_flstnew.c  ft_flstdel.c ft_flstreset.c grid.c print.c
 OBJ = fillit.o parsetet.o ft_flstaddend.o ft_flstnew.o ft_flstdel.o ft_flstreset.o grid.o print.o
-HEADER = fillit.h
+HEADER = ./include
 MAIN = main.c
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 ARCH = libft/libft.a
 
-.PHONY: all clean fclean re debug test mlibft mfillit
+.PHONY: all clean fclean re debug test mlibft mfillit fillit
 
 all: $(NAME)
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_ithdigit_fd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 20:37:35 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/08/06 20:38:04 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/11/06 01:51:34 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_put_ithdigit_fd(long nb, unsigned int index, int fd)
 {

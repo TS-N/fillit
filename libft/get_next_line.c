@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 21:24:29 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/08/17 20:55:08 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/11/15 16:33:16 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/get_next_line.h"
+#include "includes/libft.h"
 
 char		*ft_joinnfree(char *content, char *buf)
 {
@@ -88,7 +88,7 @@ int			line_extract(t_list *node, char **line, int a, size_t i)
 		free(tmoney - i);
 		return (1);
 	}
-	if (a == 1 && ((char *)node->content)[0] != '\0')
+	if (a == 1 && (char *)node->content && ((char *)node->content)[0] != '\0')
 	{
 		*line = ft_strdup((char *)node->content);
 		if (!(*line))
@@ -127,26 +127,3 @@ int			get_next_line(const int fd, char **line)
 	i = line_extract(node, line, 1, 0);
 	return (i);
 }
-/*
-**int			main()
-**{
-**	int		fd2;
-**	char	*line;
-**	int		buf;
-**	int		z;
-**	line = NULL;
-**	fd = open("text.txt", O_RDONLY);
-**	fd2 = open("text2.txt", O_RDONLY);
-**	buf = fd;
-**	while ((z = get_next_line(buf, &line)) > 0)
-**	{
-**		if (buf == fd)
-**			buf = fd2;
-**		else
-**		printf("%d\t%s\n", z, line);
-**		free(line);
-**	}
-**	system("leaks test_gnl");
-**	return (0);
-**}
-*/

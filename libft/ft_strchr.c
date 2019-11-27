@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./includes/libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
 	char	*result;
 
 	result = (char *)s;
+	if (!result)
+		return (NULL);
 	while (*result != '\0')
 	{
 		if ((int)*result == c)

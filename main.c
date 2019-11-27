@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 03:46:07 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/09/12 03:48:19 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/11/11 00:09:46 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "./include/fillit.h"
 
 int		main(int ac, char **av)
 {

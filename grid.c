@@ -6,11 +6,11 @@
 /*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 03:33:18 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/10/18 18:20:00 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/11/11 00:09:45 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "./include/fillit.h"
 
 void		arcpy(unsigned short grid[16], unsigned short *grd, int s, int i)
 {
@@ -39,7 +39,7 @@ int			mingridsize(int ret, t_tet **head)
 	}
 	while (n)
 	{
-		if (n->name->id != 0xc000c000 || l * l == ret * 4)
+		if (n->name->id != 0xc000c000 || l * l == ret * 4 || l % 2 == 0)
 			return (l);
 		n = n->next;
 	}

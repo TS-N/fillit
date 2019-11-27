@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 23:55:36 by tsaura-n          #+#    #+#             */
-/*   Updated: 2019/08/06 20:27:12 by tsaura-n         ###   ########.fr       */
+/*   Updated: 2019/11/15 16:32:13 by tsaura-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 unsigned int	ft_index_start_c(char const *s, char c)
 {
@@ -66,7 +66,6 @@ char			*ft_strtrim_char(char const *s, char c)
 		return (NULL);
 	while (++i < index_end - index_start)
 		trimed[i] = s[index_start + i];
-	printf("i=%u\n", i);
 	trimed[i] = '\0';
 	return (trimed);
 }

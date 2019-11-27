@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsaura-n <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: tsaura-n <tsaura-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/25 16:17:19 by tsaura-n          #+#    #+#              #
-#    Updated: 2019/08/21 20:41:02 by tsaura-n         ###   ########.fr        #
+#    Updated: 2019/11/12 17:03:33 by tsaura-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,20 @@ SRC = ft_isalnum.c ft_isprint.c ft_strcpy.c ft_strncpy.c ft_tolower.c \
 	ft_putnbr_fd.c ft_strset.c ft_intlen.c ft_intsize.c ft_lstnew.c \
 	ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstaddend.c ft_lstiter.c \
 	ft_lstmap.c ft_put_ithdigit.c ft_put_ithdigit_fd.c get_next_line.c
+OBJ = ft_isalnum.o ft_isprint.o ft_strcpy.o ft_strncpy.o ft_tolower.o \
+	ft_isalpha.o ft_strcat.o ft_strlen.o ft_strnstr.o ft_toupper.o \
+	ft_isascii.o ft_strchr.o ft_strncat.o ft_strlcat.o ft_strdup.o \
+	ft_strndup.o ft_strrchr.o ft_isdigit.o ft_strcmp.o ft_strncmp.o \
+	ft_strstr.o ft_memchr.o ft_memcmp.o ft_memmove.o ft_memset.o  \
+	ft_memcpy.o ft_memccpy.o ft_bzero.o ft_atoi.o ft_memalloc.o ft_memdel.o \
+	ft_strnew.o ft_strdel.o ft_strclr.o ft_striter.o ft_striteri.o \
+	ft_striteri.o ft_strmap.o ft_strmapi.o ft_strequ.o ft_strnequ.o \
+	ft_strsub.o ft_strjoin.o ft_strtrim.o ft_strtrim_char.o ft_strsplit.o \
+	ft_wcnt.o ft_wlen.o ft_itoa.o ft_putchar.o ft_putstr.o ft_putendl.o \
+	ft_putnbr.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o \
+	ft_putnbr_fd.o ft_strset.o ft_intlen.o ft_intsize.o ft_lstnew.o \
+	ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_lstaddend.o ft_lstiter.o \
+	ft_lstmap.o ft_put_ithdigit.o ft_put_ithdigit_fd.o get_next_line.o
 HEADER = includes/
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -34,10 +48,10 @@ all: $(NAME)
 
 $(NAME): $(SRC)
 	$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
-	ar rc $@ *.o
+	ar rc $@ $(OBJ)
 
 clean:
-	/bin/rm -f *.o
+	/bin/rm -f $(OBJ)
 	
 fclean: clean
 	/bin/rm -f $(NAME)
